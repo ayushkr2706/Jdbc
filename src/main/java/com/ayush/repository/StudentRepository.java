@@ -1,5 +1,7 @@
 package com.ayush.repository;
 
+import com.ayush.model.Student;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -92,11 +94,8 @@ public class StudentRepository {
             ResultSet rs = st.executeQuery(sql);
 
             while(rs.next()){
-                Long id = (long) rs.getInt(1);
-                String name = rs.getString(2);
-                String email = rs.getString(3);
-                int age = rs.getInt(4);
-                System.out.println(id + " " + name + " " + email + " " + age);
+               Student s = mapRow(rs);
+                System.out.println(s.toString());
             }
 
             con.close();
@@ -104,5 +103,14 @@ public class StudentRepository {
         catch(SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public Student mapRow(ResultSet rs) throws SQLException{
+        Student s = new Student();
+        s.setId(rs.getLong(1));
+        s.setName(rs.getString(2));
+        s.setEmail(rs.getString(3));
+        s.setAge(rs.getInt(4));
+        return s;
     }
 }

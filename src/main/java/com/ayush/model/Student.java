@@ -38,4 +38,8 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String toString(){
+        return this.id + " " + this.name + " " + this.email + " " + this.age;
+    }
 }
