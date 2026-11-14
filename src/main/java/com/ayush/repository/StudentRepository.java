@@ -113,4 +113,31 @@ public class StudentRepository {
         s.setAge(rs.getInt(4));
         return s;
     }
+
+    public void createPreparedUser(Student s){
+        try{
+            Connection con = DriverManager.getConnection(url, username, password);
+            String sql = """
+                            INSERT INTO students(name, email, age)
+                            VALUES(?, ?, ?)
+                            """;
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, s.getName());
+            ps.setString(2, s.getEmail());
+            ps.setInt(3, s.getAge());
+
+            int rowsAffected = ps.executeUpdate();
+            if(rowsAffected == 1){
+                System.out.println("Student created successfully");
+            }
+            else {
+                System.out.println("Student creation failed");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

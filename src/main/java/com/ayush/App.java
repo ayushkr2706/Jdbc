@@ -1,5 +1,6 @@
 package com.ayush;
 
+import com.ayush.model.Student;
 import com.ayush.repository.StudentRepository;
 
 import java.sql.*;
@@ -18,5 +19,8 @@ public class App
         //studentRepository.updateUser(1);
         //studentRepository.deleteUser(1);
         studentRepository.getAllUsers();
+
+//        studentRepository.createPreparedUser(new Student("Navneet",
+//                "navneet@gmail.com", 52));
     }
 }
